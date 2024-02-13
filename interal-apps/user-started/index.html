@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Internal Apps / Has user stared team repos? - eggplant.site</title>
+    <style>
+        :root {
+            --light-50: #E1E0E4;
+            --light-100: #DDDCE0;
+            --light-200: #D5D3D9;
+            --light-300: #CCCBD2;
+            --light-400: #C4C3CB;
+            --light-500: #BCBBC4;
+            --light-600: #B6B5BF;
+            --light-700: #B1B0BA;
+            --light-800: #ABAAB5;
+            --light-900: #A5A5B1;
+            --light-950: #73737b;
+
+            --dark-50: #3D3A43;
+            --dark-100: #39373F;
+            --dark-200: #322F37;
+            --dark-300: #2A282E;
+            --dark-400: #232126;
+            --dark-500: #1B1A1E;
+            --dark-600: #161519;
+            --dark-700: #111113;
+            --dark-800: #0C0C0E;
+            --dark-900: #070708;
+            --dark-950: #050505;
+        }
+
+        body {
+            font-family: Calibri, sans-serif;
+            background-image: linear-gradient(135deg, var(--dark-800) 0%, var(--dark-900) 100%);
+            color: var(--light-500);
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        header {
+            display: flex;
+            align-items: flex-end;
+            background-color: var(--dark-800);
+            border-bottom: 1px solid var(--dark-500);
+        }
+
+        h1 {
+            margin-left: 1em;
+            font-size: 16px;
+            margin-bottom: 1em;
+            color: var(--light-800);
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-left: 20px;
+            margin-bottom: 1em;
+        }
+
+        h2 span {
+            color: var(--light-950);
+        }
+
+        .flow {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: center;
+            /* justify-content: space-around; */
+            height: calc(100vh - 20px)
+        }
+
+        .node {
+            width: 40%;
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-400);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 40px;
+        }
+
+        .caller {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-400);
+            border-radius: 5px;
+            padding: 10px;
+            float: left;
+            position: absolute;
+        }
+
+        .caller.trigger {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .node h4 {
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-500);
+        }
+
+        button {
+            background-color: var(--dark-500);
+            color: var(--light-100);
+            border: 1px solid var(--dark-300);
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: var(--dark-400);
+        }
+
+        button:active {
+            background-color: var(--dark-300);
+        }
+
+        .try {
+            float: right;
+            width: 2em;
+            height: 2em;
+            padding-left: calc(1em - 8px);
+            padding-top: calc(1em - 10px);
+            margin-top: 10px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
+
+        input {
+            background-color: var(--dark-950);
+            color: var(--light-100);
+            border: 1px solid transparent;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Calibri, sans-serif;
+            width: 100%;
+        }
+
+        input:hover {
+            background-color: var(--dark-400);
+        }
+
+        input:focus {
+            background-color: var(--dark-950);
+            border: 1px solid var(--light-950);
+            outline: none;
+        }
+
+        .node .attributes {
+            padding: 10px;
+            width: 100%;
+        }
+
+        .node .attributes td {
+            padding: 10px;
+        }
+
+        .node .attributes tr td:first-child {
+            width: 10%;
+        }
+
+        .node .attributes .help td {
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .node .attributes .help ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        .node .attributes .help li {
+            padding-bottom: 5px
+        }
+
+        pre {
+            display: inline;
+            background-color: var(--dark-400);
+            padding: 3px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>eggplant.site 🍆</h1>
+        <h2><span>Internal Apps / </span>Has user stared team repos?</h2>
+    </header>
+    <div class="caller trigger">
+        <button type="button" class="try" aria-label="try">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16"> <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/> </svg>
+        </button>
+        <p>di392js.dev.eggplant.site</p>
+        <p>HTTP GET /api/users/testuser/started</p>
+    </div>
+    <div class="flow">
+        <div class="node trigger">
+            <h4>HTTP Resource</h4>
+            <table class="attributes">
+                <tbody>
+                    <tr>
+                        <td><label>Path</label></td>
+                        <td><input type="text" value="GET /api/users/[name]/started"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="node">
+            <h4>Iterate</h4>
+            <table class="attributes">
+                <tbody>
+                    <tr>
+                        <td><label>For</label></td>
+                        <td><input type="text" value="i"></td>
+                    </tr>
+                    <tr>
+                        <td><label>In</label></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="help" style="display: none;">
+                        <td></td>
+                        <td>
+                            <ul>
+                                <li>Elements in a fixed array <pre>["aubergine", "tomato"]</pre></li>
+                                <li>Characters in <pre>name</pre></li>
+                                <li>More...</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <svg class="arrow"></svg>
+    <script>
+        function drawHorizontalArrow() {
+            const caller = document.querySelector('.caller.trigger');
+            const listener = document.querySelector('.node.trigger');
+            const svg = document.querySelector('.arrow');
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const callerRect = caller.getBoundingClientRect();
+            const listenerRect = listener.getBoundingClientRect();
+            const callerX = callerRect.left + callerRect.width;
+            const listenerX = listenerRect.left - 18;
+            const offsetY = 30;
+            const callerY = callerRect.top + offsetY;
+            const listenerY = listenerRect.top + offsetY;
+            const d = `M${callerX} ${callerY} L${listenerX} ${listenerY}`;
+            path.setAttribute('d', d);
+            path.setAttribute('stroke', 'var(--light-800)');
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('fill', 'none');
+            const arrowHead = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+            arrowHead.setAttribute('id', 'arrow');
+            arrowHead.setAttribute('markerWidth', '10');
+            arrowHead.setAttribute('markerHeight', '10');
+            arrowHead.setAttribute('refX', '0');
+            arrowHead.setAttribute('refY', '3');
+            arrowHead.setAttribute('orient', 'auto');
+            const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            arrowPath.setAttribute('d', 'M0,0 L0,6 L9,3 z');
+            arrowPath.setAttribute('fill', 'var(--light-800)');
+            arrowHead.appendChild(arrowPath);
+            svg.appendChild(arrowHead);
+            path.setAttribute('marker-end', 'url(#arrow)');
+            svg.setAttribute('class', 'arrow');
+            svg.appendChild(path);
+        }
+        drawHorizontalArrow();
+
+        function toggleHelp(event) {
+            const target = event.target;
+            if (target.tagName !== 'INPUT') {
+                return;
+            }
+            const tr = target.closest('tr');
+            if (tr.nextElementSibling.classList.contains('help')) {
+                tr.nextElementSibling.style.display = event.type === 'focusout' ? 'none' : 'table-row';
+            }
+        }
+        const flow = document.querySelector('.flow');
+        flow.addEventListener('click', toggleHelp);
+        flow.addEventListener('focusout', toggleHelp);
+    </script>
+</body>
+
+</html>
